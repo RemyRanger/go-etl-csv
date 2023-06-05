@@ -1,0 +1,16 @@
+version: '3'
+
+silent: true
+
+tasks:
+  lint:
+    desc: Lint all APIs documentation
+    cmds:
+      - npx --cache node_modules/ @redocly/cli@latest lint 
+
+  build:
+    desc: Build all APIs documentation
+    cmds:
+      - rm -rf dist
+      - npx --cache node_modules/ @redocly/cli@latest bundle -o dist/api.yaml --ext yaml
+      - npx --cache node_modules/ @redocly/cli@latest build-docs dist/api.yaml -o index.html

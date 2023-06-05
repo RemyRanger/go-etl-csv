@@ -1,0 +1,45 @@
+name: CI/CD Pipeline
+on:
+  #Manually trigger workflow runs
+  workflow_dispatch:
+  #Trigger the workflow on push from the main branch
+  push:
+    branches:
+      - main
+
+env:
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  #Generate API documentation
+  generate:
+    name: Generate API documentation
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      id: git-checkhot
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+      
+    - name: Build all bundles into single file + doc page html
+      id: redoc-build
+      shell: bash
+      run: |
+        npx @redocly/cli@latest bundle -o doc/dist/api.yaml --ext yaml && \
+        npx @redocly/cli@latest build-docs doc/dist/api.yaml -o index.html
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
+      with:
+        # Upload entire repository
+        path: 'doc/'
+    
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v2

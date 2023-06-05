@@ -1,0 +1,10 @@
+srv:
+  addr: '0.0.0.0:8090'
+  key: '.config/api-go/certs/localhost.key'
+  certificate: '.config/api-go/certs/localhost.crt'
+
+mysql:
+  dsn: 'root:root@tcp(127.0.0.1:3306)/ticketstore?charset=utf8&parseTime=True&loc=Local'
+
+logs:
+  level: 'DEBUG'

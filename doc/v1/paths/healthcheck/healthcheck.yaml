@@ -1,0 +1,13 @@
+get:
+  tags:
+    - 'Healthcheck'
+  summary: Health Check
+  description: The healthcheck endpoint retrieve 200 code if service is up.
+  operationId: GetHealth
+  responses:
+    '200':
+      description: Request succeed
+    '400':
+      $ref: '../../components/errors/400_Error.yaml'
+    '503':
+      $ref: '../../components/errors/503_Error.yaml'

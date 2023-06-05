@@ -1,0 +1,22 @@
+post:
+  tags:
+    - Tickets
+  summary: Create Ticket
+  description: Create a Ticket in database.
+  operationId: CreateTicket
+  requestBody:
+    description: 'Ticket to create : '
+    required: true
+    content:
+      text/plain:
+        schema:
+          $ref: '../../components/schemas/tickets/ticketIn.yaml'
+  responses:
+    '204':
+      description: Successful operation - No content
+    '400':
+      $ref: '../../components/errors/400_Error.yaml'
+    '500':
+      $ref: '../../components/errors/500_Error.yaml'
+    '503':
+      $ref: '../../components/errors/503_Error.yaml'

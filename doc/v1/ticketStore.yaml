@@ -1,0 +1,53 @@
+openapi: 3.0.3
+info:
+  x-logo:
+    url: https://cdn.wallpapersafari.com/73/11/WuyFnC.jpg
+  title: API TicketStore
+  description: |-
+    API TicketStore
+
+    # Authentication
+
+    Token JWT (todo) - Auth is not implemented yet ..
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+  termsOfService: https://remy-ranger.raveon.fr/
+  contact:
+    name: Ranger Rémy
+    email: remy.ranger@gmail.com
+    url: https://remy-ranger.raveon.fr/
+  version: 0.1.0
+  license:
+    name: 'Rémy Ranger'
+    url: https://remy-ranger.raveon.fr/
+servers:
+  - url: 'https://api-{env}.remy-ranger.fr/v1/ticketstore'
+    description: ci/staging APIs URL.
+    variables:
+      env:
+        description: environment
+        default: staging
+        enum:
+          - ci
+          - staging
+
+paths:
+  '/healthcheck':
+    $ref: ./paths/healthcheck/healthcheck.yaml
+    
+  '/ticket':
+    $ref: ./paths/tickets/tickets.yaml
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []
+
+externalDocs:
+  description: Documentation
+  url: https://remy-ranger.raveon.fr/

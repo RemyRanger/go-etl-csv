@@ -1,0 +1,7 @@
+description: Not Found
+content:
+  application/json:
+    schema:
+      $ref: 'ModelError.yaml'
+    example:
+      errorMessage: Not Found

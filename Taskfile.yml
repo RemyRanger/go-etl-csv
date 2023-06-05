@@ -1,0 +1,37 @@
+version: '3'
+
+silent: true
+
+includes:
+  doc:
+    taskfile: doc
+    dir: doc
+
+vars:
+  PRINT_BEGIN: '\033[32m\xE2\x9c\x93'
+  PRINT_END: '\n\n\033[0m'
+
+tasks:
+  generate_docs:
+    desc: generate APIs documentation in doc/dist
+    cmds:
+      - printf "{{.PRINT_BEGIN}} Generate Documentation {{.PRINT_END}}"
+      - task doc:lint
+      - task doc:build
+
+  generate_interfaces:
+    desc: generate go openapi + mocks
+    deps: [generate_docs]
+    cmds:
+      - printf "{{.PRINT_BEGIN}} Generate Interfaces + Mocks {{.PRINT_END}}"
+      - go install github.com/deepmap/oapi-codegen/cmd/oapi-codegen
+      - oapi-codegen -version
+      - go generate -x $(go list ./... | grep -v '/handler\|/adapters|/repository' | tr '\n' ' ')
+
+  update-go-module:
+    desc: update go modules
+    cmds:
+      - printf "{{.PRINT_BEGIN}} update go modules {{.PRINT_END}}"
+      - go mod download
+      - go get -u ./...
+      - go mod tidy

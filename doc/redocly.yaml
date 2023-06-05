@@ -1,0 +1,17 @@
+extends:
+  - recommended
+
+apis:
+  ticketStore:
+    root: v1/ticketStore.yaml
+
+theme:
+  openapi:
+    pathInMiddlePanel: true
+    theme:
+      rightPanel:
+        backgroundColor: '#283046'
+      sidebar:
+        backgroundColor: '#283046'
+        textColor: '#ffffff'
+        activeTextColor: '#00a1b5'
