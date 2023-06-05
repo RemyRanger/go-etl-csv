@@ -1,0 +1,436 @@
+{
+	"info": {
+		"_postman_id": "068eb808-ff10-49a0-83d9-4ac3ae79dc07",
+		"name": "API TicketStore",
+		"description": "API TicketStore\n\n# Authentication\n\nToken JWT (todo) - Auth is not implemented yet ..\n\n<!-- ReDoc-Inject: <security-definitions> -->\n\nContact Support:\n Name: Ranger Rémy\n Email: remy.ranger@gmail.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/healthcheck",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"healthcheck"
+					],
+					"variable": [
+						{
+							"key": "env",
+							"value": "{{env}}",
+							"description": "environment (This can only be one of ci,staging)"
+						}
+					]
+				},
+				"description": "The healthcheck endpoint retrieve 200 code if service is up."
+			},
+			"response": [
+				{
+					"name": "Request succeed",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: bearer",
+								"key": "Authorization",
+								"value": "Bearer <token>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/healthcheck",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"healthcheck"
+							],
+							"variable": [
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"description": "environment (This can only be one of ci,staging)"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Bad Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: bearer",
+								"key": "Authorization",
+								"value": "Bearer <token>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/healthcheck",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"healthcheck"
+							],
+							"variable": [
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"description": "environment (This can only be one of ci,staging)"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errorMessage\": \"Bad Request\"\n}"
+				},
+				{
+					"name": "Service Unavailable",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: bearer",
+								"key": "Authorization",
+								"value": "Bearer <token>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/healthcheck",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"healthcheck"
+							],
+							"variable": [
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"description": "environment (This can only be one of ci,staging)"
+								}
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errorMessage\": \"Service Unavailable\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Create Ticket",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/plain"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "Order: 123456\nVAT: 3.10\nTotal: 16.90\n\nproduct,product_id,price\nFormule(s) midi,aZde,14.90\nCafé,IZ8z,2\nPomme,IgfdgfdZ8z,4.98"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/ticket",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"ticket"
+					],
+					"variable": [
+						{
+							"key": "env",
+							"value": "{{env}}",
+							"description": "environment (This can only be one of ci,staging)"
+						}
+					]
+				},
+				"description": "Create a Ticket in database."
+			},
+			"response": [
+				{
+					"name": "Successful operation - No content",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: bearer",
+								"key": "Authorization",
+								"value": "Bearer <token>"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "voluptate ipsum"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ticket",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ticket"
+							],
+							"variable": [
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"description": "environment (This can only be one of ci,staging)"
+								}
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: bearer",
+								"key": "Authorization",
+								"value": "Bearer <token>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "voluptate ipsum"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ticket",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ticket"
+							],
+							"variable": [
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"description": "environment (This can only be one of ci,staging)"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errorMessage\": \"Bad Request\"\n}"
+				},
+				{
+					"name": "Internal Server Error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: bearer",
+								"key": "Authorization",
+								"value": "Bearer <token>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "voluptate ipsum"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ticket",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ticket"
+							],
+							"variable": [
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"description": "environment (This can only be one of ci,staging)"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errorMessage\": \"Internal Server Error\"\n}"
+				},
+				{
+					"name": "Service Unavailable",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: bearer",
+								"key": "Authorization",
+								"value": "Bearer <token>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "voluptate ipsum"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ticket",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ticket"
+							],
+							"variable": [
+								{
+									"key": "env",
+									"value": "{{env}}",
+									"description": "environment (This can only be one of ci,staging)"
+								}
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errorMessage\": \"Service Unavailable\"\n}"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearerToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "env",
+			"value": "staging"
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://localhost:8090/v1"
+		}
+	]
+}
