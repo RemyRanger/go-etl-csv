@@ -85,5 +85,5 @@ func (h *HTTPHandler) CreateTicket(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	render.Status(r, http.StatusCreated)
+	render.Status(r, http.StatusNoContent)
 }

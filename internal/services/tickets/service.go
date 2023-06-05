@@ -33,10 +33,5 @@ func (srv *service) CreateTicket(ctx context.Context, ticket *models.Ticket) err
 		return err
 	}
 
-	/* if err := srv.repository.CreateProducts(ctx, products); err != nil {
-		logs.LogError(ServiceName, "Error create products in database.", err)
-		return err
-	} */
-
 	return nil
 }
