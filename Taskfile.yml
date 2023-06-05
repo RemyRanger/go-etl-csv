@@ -6,6 +6,10 @@ includes:
   doc:
     taskfile: doc
     dir: doc
+  
+  cmd:
+    taskfile: cmd
+    dir: cmd
 
 vars:
   PRINT_BEGIN: '\033[32m\xE2\x9c\x93'

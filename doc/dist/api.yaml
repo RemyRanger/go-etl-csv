@@ -1,0 +1,124 @@
+openapi: 3.0.3
+info:
+  x-logo:
+    url: https://cdn.wallpapersafari.com/73/11/WuyFnC.jpg
+  title: API TicketStore
+  description: |-
+    API TicketStore
+
+    # Authentication
+
+    Token JWT (todo) - Auth is not implemented yet ..
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+  termsOfService: https://remy-ranger.raveon.fr/
+  contact:
+    name: Ranger Rémy
+    email: remy.ranger@gmail.com
+    url: https://remy-ranger.raveon.fr/
+  version: 0.1.0
+  license:
+    name: Rémy Ranger
+    url: https://remy-ranger.raveon.fr/
+servers:
+  - url: https://api-{env}.remy-ranger.fr/v1/ticketstore
+    description: ci/staging APIs URL.
+    variables:
+      env:
+        description: environment
+        default: staging
+        enum:
+          - ci
+          - staging
+security:
+  - bearerAuth: []
+externalDocs:
+  description: Documentation
+  url: https://remy-ranger.raveon.fr/
+paths:
+  /healthcheck:
+    get:
+      tags:
+        - Healthcheck
+      summary: Health Check
+      description: The healthcheck endpoint retrieve 200 code if service is up.
+      operationId: GetHealth
+      responses:
+        '200':
+          description: Request succeed
+        '400':
+          $ref: '#/components/responses/400_Error'
+        '503':
+          $ref: '#/components/responses/503_Error'
+  /ticket:
+    post:
+      tags:
+        - Tickets
+      summary: Create Ticket
+      description: Create a Ticket in database.
+      operationId: CreateTicket
+      requestBody:
+        description: 'Ticket to create : '
+        required: true
+        content:
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/ticketIn'
+      responses:
+        '204':
+          description: Successful operation - No content
+        '400':
+          $ref: '#/components/responses/400_Error'
+        '500':
+          $ref: '#/components/responses/500_Error'
+        '503':
+          $ref: '#/components/responses/503_Error'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    ModelError:
+      description: A representation of an errorMessage
+      type: object
+      properties:
+        errorMessage:
+          type: string
+          description: error Message
+    ticketIn:
+      type: string
+      description: |
+        Order: 123456 \
+        VAT: 3.10 \
+        Total: 16.90 \
+        \
+        product,product_id,price \
+        Formule(s) midi,aZde,14.90 \
+        Café,IZ8z,2
+  responses:
+    400_Error:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ModelError'
+          example:
+            errorMessage: Bad Request
+    503_Error:
+      description: Service Unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ModelError'
+          example:
+            errorMessage: Service Unavailable
+    500_Error:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ModelError'
+          example:
+            errorMessage: Internal Server Error

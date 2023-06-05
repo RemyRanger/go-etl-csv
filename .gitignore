@@ -22,7 +22,6 @@ go.work
 
 # Generated APIs documentations
 node_modules
-doc/dist
 
 # Generated APIs go interfaces
 *.gen.go

@@ -1,0 +1,8 @@
+version: '3'
+
+tasks:
+  run:
+    desc: Run Api TicketStore
+    cmds:
+      - printf "{{.PRINT_BEGIN}} run TicketStore {{.PRINT_END}}"
+      - go run -ldflags "-X main.version={{.VERSION}}" main.go
