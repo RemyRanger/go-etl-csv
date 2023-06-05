@@ -18,7 +18,7 @@ Copy /config/ticketstore.yaml into your $home/.config/api-go/
 
 Copy /config/certs/ into $home/.config/api-go/
 
-Update config file with your paths and db params.
+Update config file with your paths and db params. Init database tables with sql script in /config/initDb.sql
 
 # generate documentation
 
@@ -28,7 +28,7 @@ To build all OpenAPI bundles to one unique file and generate static html file do
 
 File generated in /doc/dist is used by Golang for interface generation on build.
 
-# generate documentation
+# generate interfaces
 
 To build interfaces with 'go generate' :
 
